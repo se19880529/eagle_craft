@@ -19,11 +19,9 @@ public:
 
 npc npcpool[100000000];
 
-__int64 Rand()
+int Rand()
 {
-	__int64 a = rand();
-	__int64 b = rand();
-	return a * b;
+	return rand() * rand();;
 }
 
 int main(int argc, char* argv[])
