@@ -21,8 +21,8 @@ cp Info.plist /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.plat
 if [ "ON" == $1 ]; then
 #curl -O http://www.bobzy.cn/xcode/gen_entitlements.txt
 #mv gen_entitlements.txt gen_entitlements.py
-#sudo chmod 777 gen_entitlements.py
-cat $0 | awk -v valid=0 '{if(valid==1)print $0;if(index($0, "exit")==1)valid=1;}' > gen_entitlements.py
+cat $0 | awk -v valid=0 '{if(valid==1)print $0;if(index($0, ":gen_entitlements.py")==1)valid=1;}' > gen_entitlements.py
+sudo chmod 777 gen_entitlements.py
 export PWD=`pwd`
 echo "it's almost done! now do 2 follow things:"
 echo "1.now clear your target to Don't Code Sign, clear your target's Provision Profile configure"
@@ -37,6 +37,7 @@ fi
 
 
 exit 0
+:gen_entitlements.py
 #!/usr/bin/env python
 
 import sys
