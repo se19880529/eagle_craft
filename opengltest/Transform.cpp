@@ -21,7 +21,7 @@ inline const ELMatrix4x4 GetMatrix() const
 
 void Transform::_RefreshMatrix()
 {
-	dirty = false;
+	localDirty = false;
 	Quaternion q;
 	q.MakeEulerRotation(rotation.x, rotation.y, rotation.z);
 	localMatrix = q.MakeRotateMatrix();
@@ -35,10 +35,11 @@ void Transform::_RefreshMatrix()
 	localMatrix.elems[1][3] = position.y;
 	localMatrix.elems[2][3] = position.z;
 }
+
 void Transform::SetLocalMatrix(const ELMatrix4x4& matrix)
 {
-	_SetDirty();
-	dirty = false;
+	_SetLocalDirty();
+	localDirty = false;
 	localMatrix = matrix;
 	position.x = localMatrix.elems[0][3];
 	position.y = localMatrix.elems[1][3];
@@ -63,32 +64,75 @@ void Transform::SetLocalMatrix(const ELMatrix4x4& matrix)
 }
 const Matrix& Transform::GetLocalMatrix() const
 {
-	if(dirty)
+	if(localDirty)
 		_RefreshMatrix();
 	return localMatrix;
 }
+const Matrix& Transform::GetWorldMatrix() const
+{
+	if(worldDirty)
+	{
+		worldDirty = false;
+		worldMatrix = GetLocalMatrix();
+		if(parent != NULL)
+			worldMatrix = worldMatrix.RightMultiply(parent.GetWorldMatrix());
+	}
+	return worldMatrix;
+}
 void Transform::SetPosition(const ELVector& pos)
 {
-	_SetDirty();
+	_SetLocalDirty();
 	position = pos;
 }
 void Transform::SetScale(const ELVector& _scale)
 {
-	_SetDirty();
+	_SetLocalDirty();
 	scale = _scale;
 }
 void Transform::SetRotation(const ELVector& rot)
 {
-	_SetDirty();
+	_SetLocalDirty();
 	rotation = rot;
 }
-void Transform::_SetDirty()
+inline const Transform& GetParent() const
 {
-	dirty = true;
+	return *parent;
+}
+void SetParent(Transform& p)
+{
+	std::vector<Transform*>::iterator iter = p.childs.begin();
+	while(iter != p.childs.end())
+		if(*iter == this)
+			return;
+		else
+			iter++;
+	p.childs.push_back(this);
+	parent = &p;
+	_SetWorldDirty();
+}
+void Transform::_SetWorldDirty()
+{
+	worldDirty = true;
+	if(attachedObject != NULL)
+		attachedObject->OnTransformDirty(true);
 	std::vector<Transform*>::iterator iter = childs.begin();
 	while(iter != childs.end())
 	{
-		(*iter)->_SetDirty();
+		(*iter)->_SetWorldDirty();
+		iter++;
+	}
+}
+void Transform::_SetLocalDirty()
+{
+	localDirty = true;
+	worldDirty = true;
+	if(attachedObject != NULL)
+		attachedObject->OnTransformDirty(false);
+	
+	std::vector<Transform*>::iterator iter = childs.begin();
+	while(iter != childs.end())
+	{
+		(*iter)->_SetWorldDirty();
 		iter++;
 	}
 }

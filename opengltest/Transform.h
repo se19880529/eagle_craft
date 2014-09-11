@@ -6,28 +6,36 @@
 class Transform
 {
 public:
-	Transform():scale(1,1,1),parent(NULL),dirty(false), localMatrix(1){}
+	Transform(GLObject* obj=NULL):attachedObject(obj), scale(1,1,1),parent(NULL),dirty(true),parentDirty(true), localMatrix(1){}
 
 	const ELVector& GetPosition() const;
 	const ELVector& GetRotation() const;
 	const ELVector& GetScale() const;
 	const ELMatrix4x4 GetMatrix() const;
 	const Matrix& GetLocalMatrix() const;
+	const Matrix& GetWorldMatrix() const;
+	const Transform& GetParent() const;
 
+	void SetParent(Transform& parent) const;
 	void SetLocalMatrix(const ELMatrix4x4& matrix);
 	void SetPosition(const ELVector& pos);
 	void SetScale(const ELVector& scale);
 	void SetRotation(const ELVector& rot);
+	GLObject* GetGLObject(){ return attachedObject; };
 protected:
 	ELVector position;
 	ELVector rotation;
 	ELVector scale;
 	Matrix localMatrix;
+	Matrix worldMatrix;
 	Transform* parent;
 	std::vector<Transform*> childs;
-	bool dirty;
+	bool localDirty;
+	bool worldDirty;
 private:
 	void _RefreshMatrix();
-	void _SetDirty();
+	void _SetWorldDirty();
+	void _SetLocalDirty();
+	GLObject* attachedObject;
 };
 #endif
