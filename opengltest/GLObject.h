@@ -3,8 +3,7 @@
 class GLObject
 {
 public:
-	Transform* GetTransform();
-
+	Transform& GetTransform(){ return transform;}
 protected:
-	Transform* transform;
-}
+	Transform transform;
+};
