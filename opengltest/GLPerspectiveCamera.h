@@ -4,7 +4,7 @@
 class GLPerspectiveCamera
 {
 public:
-	GLPerspectiveCamera():dirty(true){}
+	GLPerspectiveCamera(){}
 	void OnTransformDirty(bool onlyWorld){ dirty = true;}
 	void SetCurrent();
 	void SetFOV(float f){ fov = f; dirty = true; }
@@ -12,6 +12,5 @@ public:
 protected:
 	Matrix worldToViewMatrix;
 	float fov;
-	bool dirty;
 };
 #endif

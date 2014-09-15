@@ -1,6 +1,7 @@
 #include "GLPerspectiveCamera.h"
 void SetCurrent()
 {
+	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	if(dirty)
 	{
@@ -8,5 +9,5 @@ void SetCurrent()
 		worldToViewMatrix = transform.GetWorldMatrix();
 		worldToViewMatrix.Invert();
 	}
-	gl
+	glLoadMatrixf((float*)&worldToViewMatrix);
 }

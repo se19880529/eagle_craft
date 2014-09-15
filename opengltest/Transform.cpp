@@ -26,14 +26,14 @@ void Transform::_RefreshMatrix()
 	q.MakeEulerRotation(rotation.x, rotation.y, rotation.z);
 	localMatrix = q.MakeRotateMatrix();
 	for(int j = 0; j < 3; j++)
-		localMatrix.elems[j][0]*=scale.x;
+		localMatrix.Element(j, 0)*=scale.x;
 	for(int j = 0; j < 3; j++)
-		localMatrix.elems[j][0]*=scale.y;
+		localMatrix.Element(j, 0)*=scale.y;
 	for(int j = 0; j < 3; j++)
-		localMatrix.elems[j][0]*=scale.z;
-	localMatrix.elems[0][3] = position.x;
-	localMatrix.elems[1][3] = position.y;
-	localMatrix.elems[2][3] = position.z;
+		localMatrix.Element(j, 0)*=scale.z;
+	localMatrix.Element(0,3) = position.x;
+	localMatrix.Element(1,3) = position.y;
+	localMatrix.Element(2,3) = position.z;
 }
 
 void Transform::SetLocalMatrix(const ELMatrix4x4& matrix)
@@ -41,26 +41,26 @@ void Transform::SetLocalMatrix(const ELMatrix4x4& matrix)
 	_SetLocalDirty();
 	localDirty = false;
 	localMatrix = matrix;
-	position.x = localMatrix.elems[0][3];
-	position.y = localMatrix.elems[1][3];
-	position.z = localMatrix.elems[2][3];
-	scale.x = sqrt(localMatrix.elems[0][0]*localMatrix.elems[0][0] + localMatrix.elems[0][1]*localMatrix.elems[0][1] + localMatrix.elems[0][2]*localMatrix.elems[0][2]);
-	scale.y = sqrt(localMatrix.elems[1][0]*localMatrix.elems[1][0] + localMatrix.elems[1][1]*localMatrix.elems[1][1] + localMatrix.elems[1][2]*localMatrix.elems[1][2]);
-	scale.z = sqrt(localMatrix.elems[2][0]*localMatrix.elems[2][0] + localMatrix.elems[2][1]*localMatrix.elems[2][1] + localMatrix.elems[2][2]*localMatrix.elems[2][2]);
+	position.x = localMatrix.Element(0,3);
+	position.y = localMatrix.Element(1,3);
+	position.z = localMatrix.Element(2,3);
+	scale.x = sqrt(localMatrix.Element(0,0)*localMatrix.Element(0,0) + localMatrix.Element(0,1)*localMatrix.Element(0,1) + localMatrix.Element(0,2)*localMatrix.Element(0,2));
+	scale.y = sqrt(localMatrix.Element(1,0)*localMatrix.Element(1,0) + localMatrix.Element(1,1)*localMatrix.Element(1,1) + localMatrix.Element(1,2)*localMatrix.Element(1,2));
+	scale.z = sqrt(localMatrix.Element(2,0)*localMatrix.Element(2,0) + localMatrix.Element(2,1)*localMatrix.Element(2,1) + localMatrix.Element(2,2)*localMatrix.Element(2,2));
 	
-	if(abs(localMatrix.elems[0][0]) < MIN_POSITIVE)
-		rotation.x = (localMatrix.elems[0][0] * localMatrix.elems[1][0]>0):PI/2:-PI/2;
+	if(abs(localMatrix.Element(0,0)) < MIN_POSITIVE)
+		rotation.x = (localMatrix.Element(0,0) * localMatrix.Element(1,0)>0):PI/2:-PI/2;
 	else
-		rotation.x = atan( localMatrix.elems[1][0]/localMatrix.elems[0][0] );
+		rotation.x = atan( localMatrix.Element(1,0)/localMatrix.Element(0,0) );
 
-	if(abs(localMatrix.elems[2][2]) < MIN_POSITIVE)
-		rotation.y = (localMatrix.elems[2][1] * localMatrix.elems[2][2]>0):PI/2:-PI/2;
+	if(abs(localMatrix.Element(2,2)) < MIN_POSITIVE)
+		rotation.y = (localMatrix.Element(2,1) * localMatrix.Element(2,2)>0):PI/2:-PI/2;
 	else
-		rotation.y = atan( localMatrix.elems[2][1]/localMatrix.elems[2][2] );
-	if(abs(localMatrix.elems[2][2]) + abs(localMatrix.elems[2][1]) < MIN_POSITIVE)
-		rotation.z = (localMatrix.elems[2][0]>0):-PI/2:PI/2;
+		rotation.y = atan( localMatrix.Element(2,1)/localMatrix.Element(2,2) );
+	if(abs(localMatrix.Element(2,2)) + abs(localMatrix.Element(2,1)) < MIN_POSITIVE)
+		rotation.z = (localMatrix.Element(2,0)>0):-PI/2:PI/2;
 	else
-		rotation.z = atan( -localMatrix.elems[2][0]/ sqrt( localMatrix.elems[2][1]*localMatrix.elems[2][1]+localMatrix.elems[2][2]*localMatrix.elems[2][2]) );
+		rotation.z = atan( -localMatrix.Element(2,0)/ sqrt( localMatrix.Element(2,1)*localMatrix.Element(2,1)+localMatrix.Element(2,2)*localMatrix.Element(2,2)) );
 }
 const Matrix& Transform::GetLocalMatrix() const
 {
