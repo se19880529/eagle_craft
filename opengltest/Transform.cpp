@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "Transform.h"
 
 
@@ -14,7 +13,7 @@ inline const ELVector& Transform::GetScale() const
 {
 	return scale;
 }
-inline const ELMatrix4x4 GetMatrix() const
+inline const Matrix GetMatrix() const
 {
 	return localMatrix;
 }

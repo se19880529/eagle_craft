@@ -1,6 +1,7 @@
 #ifndef TRANSFORM_H
 #define TRANSFORM_H
 #include "GLTBase.h"
+#include "GLObject.h"
 #include <vector>
 
 class Transform
@@ -11,13 +12,13 @@ public:
 	const ELVector& GetPosition() const;
 	const ELVector& GetRotation() const;
 	const ELVector& GetScale() const;
-	const ELMatrix4x4 GetMatrix() const;
+	const Matrix& GetMatrix() const;
 	const Matrix& GetLocalMatrix() const;
 	const Matrix& GetWorldMatrix() const;
 	const Transform& GetParent() const;
 
 	void SetParent(Transform& parent) const;
-	void SetLocalMatrix(const ELMatrix4x4& matrix);
+	void SetLocalMatrix(const Matrix& matrix);
 	void SetPosition(const ELVector& pos);
 	void SetScale(const ELVector& scale);
 	void SetRotation(const ELVector& rot);

@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "Vector.h"
 #include <math.h>
 float ELVector::DotProduct(const ELVector& v)

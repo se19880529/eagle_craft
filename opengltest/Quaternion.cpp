@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "Quaternion.h"
 #include <math.h>
 inline void Quaternion::MakeEulerRotation(float _x, float _y, float _z)

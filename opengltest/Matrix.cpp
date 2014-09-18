@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "Matrix.h"
 #include <math.h>
 Matrix::Matrix(const Matrix& m)

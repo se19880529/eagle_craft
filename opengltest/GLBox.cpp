@@ -1,11 +1,5 @@
-#include "stdafx.h"
 #include "GLBox.h"
 #include <glew.h>
-#define WINDOWS
-#ifdef WINDOWS
-#include <gl/gl.h>
-#include <gl/glu.h>
-#endif
 
 void GLBox::Set(float dx, float dy, float dz)
 {
@@ -61,6 +55,7 @@ void GLBox::SetUV(int faceIndex, int vertexIndex, float u, float v)
 
 void GLBox::Draw()
 {
+	glEnable(GL_TEXTURE_2D);
 	glBegin(GL_TRIANGLES);
 	//up
 	glBindTexture(GL_TEXTURE_2D, textures[0]);
