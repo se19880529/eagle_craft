@@ -1,8 +1,9 @@
 // testggl.cpp : 定义应用程序的入口点。
 //
-
 #include "testggl.h"
-
+#include "stdafx.h"
+#include "../../GLRenderManager.h"
+#include "../../RenderTargetWindows.h"
 #define MAX_LOADSTRING 100
 
 // 全局变量:
@@ -15,6 +16,8 @@ ATOM				MyRegisterClass(HINSTANCE hInstance);
 BOOL				InitInstance(HINSTANCE, int);
 LRESULT CALLBACK	WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK	About(HWND, UINT, WPARAM, LPARAM);
+GLRenderManager manager;
+RenderTargetWindows* renderTarget;
 
 int APIENTRY _tWinMain(HINSTANCE hInstance,
                      HINSTANCE hPrevInstance,
@@ -108,7 +111,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    hWnd = CreateWindow(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, NULL, NULL, hInstance, NULL);
-
+   
    if (!hWnd)
    {
       return FALSE;
@@ -116,7 +119,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
-
+   renderTarget = new RenderTargetWindows(hWnd);
    return TRUE;
 }
 
@@ -133,9 +136,10 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	int wmId, wmEvent;
+	/*
 	PAINTSTRUCT ps;
 	HDC hdc;
-
+	*/
 	switch (message)
 	{
 	case WM_COMMAND:
@@ -155,9 +159,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		}
 		break;
 	case WM_PAINT:
-		hdc = BeginPaint(hWnd, &ps);
-		// TODO: 在此添加任意绘图代码...
-		EndPaint(hWnd, &ps);
+		manager.Render();
 		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);

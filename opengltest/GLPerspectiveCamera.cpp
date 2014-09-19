@@ -1,4 +1,4 @@
-#inlcude <math.h>
+#include <math.h>
 #include "GLPerspectiveCamera.h"
 const Matrix& GLPerspectiveCamera::GetProjectMatrix()
 {

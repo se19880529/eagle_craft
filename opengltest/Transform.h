@@ -1,23 +1,22 @@
 #ifndef TRANSFORM_H
 #define TRANSFORM_H
 #include "GLTBase.h"
-#include "GLObject.h"
 #include <vector>
-
+class GLObject;
 class Transform
 {
 public:
-	Transform(GLObject* obj=NULL):attachedObject(obj), scale(1,1,1),parent(NULL),dirty(true),parentDirty(true), localMatrix(1){}
+	Transform(GLObject* obj = NULL) :attachedObject(obj), scale(1, 1, 1), parent(NULL), localDirty(true), worldDirty(true), localMatrix(1){}
 
 	const ELVector& GetPosition() const;
 	const ELVector& GetRotation() const;
 	const ELVector& GetScale() const;
-	const Matrix& GetMatrix() const;
-	const Matrix& GetLocalMatrix() const;
-	const Matrix& GetWorldMatrix() const;
+	const Matrix& GetMatrix();
+	const Matrix& GetLocalMatrix();
+	const Matrix& GetWorldMatrix();
 	const Transform& GetParent() const;
 
-	void SetParent(Transform& parent) const;
+	void SetParent(Transform& parent);
 	void SetLocalMatrix(const Matrix& matrix);
 	void SetPosition(const ELVector& pos);
 	void SetScale(const ELVector& scale);

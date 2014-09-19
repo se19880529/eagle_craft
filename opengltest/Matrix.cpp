@@ -1,5 +1,6 @@
 #include "Matrix.h"
 #include <math.h>
+#include <string.h>
 Matrix::Matrix(const Matrix& m)
 {
 	for(int i = 0; i < MATRIX_SZ; i++)
@@ -31,7 +32,7 @@ void Matrix::SetDiag(float e)
 		}
 	}
 }
-Matrix Matrix::LeftMultiply(const Matrix& matrix)
+Matrix Matrix::LeftMultiply(const Matrix& matrix) const
 {
 	Matrix res;
 	for(int i = 0; i < MATRIX_SZ; i++)
@@ -44,7 +45,7 @@ Matrix Matrix::LeftMultiply(const Matrix& matrix)
 		}
 	return res;
 }
-Matrix Matrix::RightMultiply(const Matrix& matrix)
+Matrix Matrix::RightMultiply(const Matrix& matrix) const
 {
 	return matrix.LeftMultiply(*this);
 }

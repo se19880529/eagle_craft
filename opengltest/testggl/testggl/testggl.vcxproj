@@ -65,6 +65,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>glu32.lib;opengl32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -89,7 +90,10 @@
   <ItemGroup>
     <ClCompile Include="..\..\GLBox.cpp" />
     <ClCompile Include="..\..\GLCamera.cpp" />
+    <ClCompile Include="..\..\GLObject.cpp" />
     <ClCompile Include="..\..\GLPerspectiveCamera.cpp" />
+    <ClCompile Include="..\..\GLRenderManager.cpp" />
+    <ClCompile Include="..\..\GLSize.cpp" />
     <ClCompile Include="..\..\Matrix.cpp" />
     <ClCompile Include="..\..\Quaternion.cpp" />
     <ClCompile Include="..\..\RenderTargetWindows.cpp" />
@@ -107,7 +111,9 @@
     <ClInclude Include="..\..\GLDefine.h" />
     <ClInclude Include="..\..\GLObject.h" />
     <ClInclude Include="..\..\GLPerspectiveCamera.h" />
+    <ClInclude Include="..\..\GLRenderManager.h" />
     <ClInclude Include="..\..\GLRenderTarget.h" />
+    <ClInclude Include="..\..\GLSize.h" />
     <ClInclude Include="..\..\GLTBase.h" />
     <ClInclude Include="..\..\Matrix.h" />
     <ClInclude Include="..\..\Quaternion.h" />

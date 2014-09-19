@@ -1,6 +1,6 @@
 #include "Quaternion.h"
 #include <math.h>
-inline void Quaternion::MakeEulerRotation(float _x, float _y, float _z)
+void Quaternion::MakeEulerRotation(float _x, float _y, float _z)
 {
    float cx = cos(_x/2);
    float sx = sin(_x/2);
@@ -15,7 +15,7 @@ inline void Quaternion::MakeEulerRotation(float _x, float _y, float _z)
    this->z = cx*cy*sz - sx*sy*cz;
 }
 
-inline Matrix Quaternion::MakeRotateMatrix() const
+Matrix Quaternion::MakeRotateMatrix() const
 {
 	Matrix ret;
 	float xx = x*x;

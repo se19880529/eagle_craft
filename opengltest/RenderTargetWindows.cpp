@@ -15,7 +15,7 @@ RenderTargetWindows::RenderTargetWindows(HWND hWnd)
 	pfd.cDepthBits = 16;
 	pfd.iLayerType = PFD_MAIN_PLANE;
 	int pixelFormat = ChoosePixelFormat(hDC, &pfd);
-	if (pixelFormat != 0)
+	if (pixelFormat == 0)
 		invalidCode = 1;			//pixelFormat cannot found
 	else
 	{
@@ -25,8 +25,21 @@ RenderTargetWindows::RenderTargetWindows(HWND hWnd)
 	}
 }
 
+RenderTargetWindows::~RenderTargetWindows()
+{
+	wglMakeCurrent(NULL, NULL);
+	wglDeleteContext(hRC);
+	ReleaseDC(mhWnd, hDC);
+}
+
 void RenderTargetWindows::SetCurrent()
 {
 	if (invalidCode == 0)
 		wglMakeCurrent(hDC, hRC);
+}
+
+void RenderTargetWindows::BeforeRender(){}
+void RenderTargetWindows::AfterRender()
+{
+	SwapBuffers(hDC);
 }

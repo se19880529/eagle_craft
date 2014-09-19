@@ -1,5 +1,4 @@
 #include "GLBox.h"
-#include <glew.h>
 
 void GLBox::Set(float dx, float dy, float dz)
 {

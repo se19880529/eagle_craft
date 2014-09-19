@@ -6,8 +6,11 @@ class RenderTargetWindows : public RenderTarget
 {
 public:
 	RenderTargetWindows(HWND hWnd);
+	~RenderTargetWindows();
 	void Init(){}
 	void SetCurrent();
+	void BeforeRender();
+	void AfterRender();
 private:
 	HGLRC hRC;
 	HWND mhWnd;

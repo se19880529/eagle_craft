@@ -16,8 +16,8 @@ public:
 			col = col % MATRIX_SZ;
 		return elems[row][col];
 	}
-	Matrix LeftMultiply(const Matrix& matrix);
-	Matrix RightMultiply(const Matrix& matrix);
+	Matrix LeftMultiply(const Matrix& matrix) const;
+	Matrix RightMultiply(const Matrix& matrix) const;
 	bool Invert();
 	void Transpose();
 protected:

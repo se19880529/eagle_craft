@@ -4,6 +4,8 @@
 #include "Quaternion.h"
 #define WINDOWS
 #ifdef WINDOWS
+#include <Windows.h>
+#include <glew.h>
 #include <gl/gl.h>
 #include <gl/glu.h>
 #endif

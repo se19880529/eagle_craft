@@ -45,6 +45,15 @@
     <ClCompile Include="..\..\RenderTargetWindows.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\GLRenderManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GLObject.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GLSize.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\GLBox.h">
@@ -93,6 +102,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\RenderTargetWindows.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GLRenderManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GLSize.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,5 @@
 #include "Transform.h"
-
+#include "GLObject.h"
 
 inline const ELVector& Transform::GetPosition() const
 {
@@ -13,7 +13,7 @@ inline const ELVector& Transform::GetScale() const
 {
 	return scale;
 }
-inline const Matrix GetMatrix() const
+inline const Matrix& Transform::GetMatrix()
 {
 	return localMatrix;
 }
@@ -35,7 +35,7 @@ void Transform::_RefreshMatrix()
 	localMatrix.Element(2,3) = position.z;
 }
 
-void Transform::SetLocalMatrix(const ELMatrix4x4& matrix)
+void Transform::SetLocalMatrix(const Matrix& matrix)
 {
 	_SetLocalDirty();
 	localDirty = false;
@@ -48,33 +48,33 @@ void Transform::SetLocalMatrix(const ELMatrix4x4& matrix)
 	scale.z = sqrt(localMatrix.Element(2,0)*localMatrix.Element(2,0) + localMatrix.Element(2,1)*localMatrix.Element(2,1) + localMatrix.Element(2,2)*localMatrix.Element(2,2));
 	
 	if(abs(localMatrix.Element(0,0)) < MIN_POSITIVE)
-		rotation.x = (localMatrix.Element(0,0) * localMatrix.Element(1,0)>0):PI/2:-PI/2;
+		rotation.x = (localMatrix.Element(0,0) * localMatrix.Element(1,0)>0)?PI/2:-PI/2;
 	else
 		rotation.x = atan( localMatrix.Element(1,0)/localMatrix.Element(0,0) );
 
 	if(abs(localMatrix.Element(2,2)) < MIN_POSITIVE)
-		rotation.y = (localMatrix.Element(2,1) * localMatrix.Element(2,2)>0):PI/2:-PI/2;
+		rotation.y = (localMatrix.Element(2,1) * localMatrix.Element(2,2)>0)?PI/2:-PI/2;
 	else
 		rotation.y = atan( localMatrix.Element(2,1)/localMatrix.Element(2,2) );
 	if(abs(localMatrix.Element(2,2)) + abs(localMatrix.Element(2,1)) < MIN_POSITIVE)
-		rotation.z = (localMatrix.Element(2,0)>0):-PI/2:PI/2;
+		rotation.z = (localMatrix.Element(2,0)>0)?-PI/2:PI/2;
 	else
 		rotation.z = atan( -localMatrix.Element(2,0)/ sqrt( localMatrix.Element(2,1)*localMatrix.Element(2,1)+localMatrix.Element(2,2)*localMatrix.Element(2,2)) );
 }
-const Matrix& Transform::GetLocalMatrix() const
+const Matrix& Transform::GetLocalMatrix()
 {
 	if(localDirty)
 		_RefreshMatrix();
 	return localMatrix;
 }
-const Matrix& Transform::GetWorldMatrix() const
+const Matrix& Transform::GetWorldMatrix()
 {
 	if(worldDirty)
 	{
 		worldDirty = false;
 		worldMatrix = GetLocalMatrix();
 		if(parent != NULL)
-			worldMatrix = worldMatrix.RightMultiply(parent.GetWorldMatrix());
+			worldMatrix = worldMatrix.RightMultiply(parent->GetWorldMatrix());
 	}
 	return worldMatrix;
 }
@@ -93,11 +93,11 @@ void Transform::SetRotation(const ELVector& rot)
 	_SetLocalDirty();
 	rotation = rot;
 }
-inline const Transform& GetParent() const
+inline const Transform& Transform::GetParent() const
 {
 	return *parent;
 }
-void SetParent(Transform& p)
+void Transform::SetParent(Transform& p)
 {
 	std::vector<Transform*>::iterator iter = p.childs.begin();
 	while(iter != p.childs.end())

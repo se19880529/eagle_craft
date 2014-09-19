@@ -1,6 +1,7 @@
 #ifndef GLCAMERA_H
 #define GLCAMERA_H
 #include "GLTBase.h"
+#include "GLObject.h"
 class GLCamera : public GLObject
 {
 public:
@@ -12,5 +13,6 @@ public:
 protected:
 	bool dirty;
 	Matrix worldToViewMatrix;
+	
 };
 #endif
