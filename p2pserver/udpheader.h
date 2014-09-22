@@ -235,7 +235,7 @@ public:
 		buffer = SessionProtocol::Write(buffer, end);
 		if(end - buffer >= 2+strlen(name))
 		{
-			*(unsigned char*)buffer = strlen(name);
+			*(unsigned short*)buffer = strlen(name);
 			buffer += 2;
 			memcpy(buffer, name, strlen(name));
 			buffer += strlen(name);
