@@ -22,6 +22,7 @@
 		D997AFED19D06F0D0090B455 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D997AFCC19D06F0D0090B455 /* UIKit.framework */; };
 		D997AFF519D06F0D0090B455 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D997AFF319D06F0D0090B455 /* InfoPlist.strings */; };
 		D997AFF719D06F0D0090B455 /* P2PChatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D997AFF619D06F0D0090B455 /* P2PChatTests.m */; };
+		D997B00319D0703B0090B455 /* ELP2PChat.mm in Sources */ = {isa = PBXBuildFile; fileRef = D997B00219D0703B0090B455 /* ELP2PChat.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,9 @@
 		D997AFF219D06F0D0090B455 /* P2PChatTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "P2PChatTests-Info.plist"; sourceTree = "<group>"; };
 		D997AFF419D06F0D0090B455 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D997AFF619D06F0D0090B455 /* P2PChatTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = P2PChatTests.m; sourceTree = "<group>"; };
+		D997B00019D06FA30090B455 /* udpclient.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = udpclient.h; sourceTree = "<group>"; };
+		D997B00119D0703B0090B455 /* ELP2PChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELP2PChat.h; sourceTree = "<group>"; };
+		D997B00219D0703B0090B455 /* ELP2PChat.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ELP2PChat.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +118,7 @@
 		D997AFCE19D06F0D0090B455 /* P2PChat */ = {
 			isa = PBXGroup;
 			children = (
+				D997B00019D06FA30090B455 /* udpclient.h */,
 				D997AFD719D06F0D0090B455 /* ELAppDelegate.h */,
 				D997AFD819D06F0D0090B455 /* ELAppDelegate.m */,
 				D997AFDA19D06F0D0090B455 /* Main_iPhone.storyboard */,
@@ -122,6 +127,8 @@
 				D997AFE119D06F0D0090B455 /* ELViewController.m */,
 				D997AFE319D06F0D0090B455 /* Images.xcassets */,
 				D997AFCF19D06F0D0090B455 /* Supporting Files */,
+				D997B00119D0703B0090B455 /* ELP2PChat.h */,
+				D997B00219D0703B0090B455 /* ELP2PChat.mm */,
 			);
 			path = P2PChat;
 			sourceTree = "<group>";
@@ -255,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D997AFE219D06F0D0090B455 /* ELViewController.m in Sources */,
+				D997B00319D0703B0090B455 /* ELP2PChat.mm in Sources */,
 				D997AFD519D06F0D0090B455 /* main.m in Sources */,
 				D997AFD919D06F0D0090B455 /* ELAppDelegate.m in Sources */,
 			);
