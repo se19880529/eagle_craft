@@ -12,6 +12,7 @@ class P2PClient
 public:
 	P2PClient(const char* ip, unsigned short port)
 	{
+		server_addr.sin_family = AF_INET;
 		server_addr.sin_addr.s_addr = inet_addr(ip);
 		server_addr.sin_port = htons(port);
 		session_id = -1;
@@ -133,9 +134,9 @@ public:
 						BufferDump(buffer,recvlen);
 						if(addr.sin_addr.s_addr == server_addr.sin_addr.s_addr && addr.sin_port == server_addr.sin_port)
 						{
-							cout<<"recieve protocol from server:"<<Protocol::PeekType(buffer, 4096)<<endl;
+							cout<<"recieve protocol from server:"<<P2PProtocol::PeekType(buffer, 4096)<<endl;
 							//so we talk to him
-							switch(Protocol::PeekType(buffer, 4096))
+							switch(P2PProtocol::PeekType(buffer, 4096))
 							{
 							case MakeHoleRequest::TYPE:
 							{

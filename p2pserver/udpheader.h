@@ -147,11 +147,11 @@ public:
 private:
 	map<long, PeerInfoSet> _peerMap;
 };
-class Protocol
+class P2PProtocol
 {
 public:
 	int type;
-	Protocol(int t):type(t){}
+	P2PProtocol(int t):type(t){}
 	static int PeekType(char* buffer, int size)
 	{
 		if(size > 4)
@@ -163,7 +163,7 @@ public:
 			return -1;		//a invalid value
 		}
 	}
-	static Protocol* Create(int type);
+	static P2PProtocol* Create(int type);
 	virtual size_t Read(char* buffer, size_t size)
 	{
 		if(size > 4)
@@ -185,14 +185,14 @@ public:
 	}
 };
 
-class SessionProtocol : public Protocol
+class SessionProtocol : public P2PProtocol
 {
 public:
 	long id;
-	SessionProtocol(int t) : Protocol(t){}
+	SessionProtocol(int t) : P2PProtocol(t){}
 	size_t Read(char* buffer, size_t size)
 	{
-		size_t used = Protocol::Read(buffer, size);
+		size_t used = P2PProtocol::Read(buffer, size);
 		if(size-used > 8)
 		{
 			id = *(long*)(buffer+used);
@@ -202,7 +202,7 @@ public:
 	}
 	char* Write(char* buffer, char* end)
 	{
-		buffer = Protocol::Write(buffer, end);
+		buffer = P2PProtocol::Write(buffer, end);
 		if(end - buffer > 8)
 		{
 			*(long*)buffer = id;
@@ -244,16 +244,16 @@ public:
 	}
 };
 
-class AddPeerResultProtocol : public Protocol
+class AddPeerResultProtocol : public P2PProtocol
 {
 public:
 	const static int TYPE = 2;
 	unsigned char retcode;
 	long id;
-	AddPeerResultProtocol():Protocol(TYPE){}
+	AddPeerResultProtocol():P2PProtocol(TYPE){}
 	size_t Read(char* buffer, size_t size)
 	{
-		size_t used = Protocol::Read(buffer, size);
+		size_t used = P2PProtocol::Read(buffer, size);
 		if(size-used >= 9)
 		{
 			retcode = *(unsigned char*)(buffer+used);
@@ -265,7 +265,7 @@ public:
 	}
 	char* Write(char* buffer, char* end)
 	{
-		buffer = Protocol::Write(buffer, end);
+		buffer = P2PProtocol::Write(buffer, end);
 		if(end - buffer >= 9)
 		{
 			*(unsigned char*)buffer = retcode;
@@ -310,17 +310,17 @@ public:
 	}
 };
 
-class QueryPeerReProtocol : public Protocol
+class QueryPeerReProtocol : public P2PProtocol
 {
 public:
 	const static int TYPE = 4;
 	char ip[256];
 	unsigned short port;
 	char name[256];
-	QueryPeerReProtocol():Protocol(TYPE){}
+	QueryPeerReProtocol():P2PProtocol(TYPE){}
 	size_t Read(char* buffer, size_t size)
 	{
-		size_t used = Protocol::Read(buffer, size);
+		size_t used = P2PProtocol::Read(buffer, size);
 		buffer += used;
 		if(size - used > 2 && size - used > *(unsigned short*)buffer+6 && size - used >= *(unsigned short*)buffer+6+*(unsigned short*)(buffer+*(unsigned short*)(buffer)+4))
 		{
@@ -343,7 +343,7 @@ public:
 	}
 	char* Write(char* buffer, char* end)
 	{
-		buffer = Protocol::Write(buffer, end);
+		buffer = P2PProtocol::Write(buffer, end);
 		if(end - buffer >= strlen(ip)+6+strlen(name))
 		{
 			*(unsigned short*)buffer = strlen(ip);
@@ -361,17 +361,17 @@ public:
 	}
 };
 
-class MakeHoleRequest : public Protocol
+class MakeHoleRequest : public P2PProtocol
 {
 public:
 	const static int TYPE = 5;
 	char ip[256];
 	unsigned short port;
 	char name[256];
-	MakeHoleRequest():Protocol(TYPE){}
+	MakeHoleRequest():P2PProtocol(TYPE){}
 	size_t Read(char* buffer, size_t size)
 	{
-		size_t used = Protocol::Read(buffer, size);
+		size_t used = P2PProtocol::Read(buffer, size);
 		buffer += used;
 		if(size - used > 2 && size - used > *(unsigned short*)buffer+6 && size - used >= *(unsigned short*)buffer+6+*(unsigned short*)(buffer+*(unsigned short*)(buffer)+4))
 		{
@@ -394,7 +394,7 @@ public:
 	}
 	char* Write(char* buffer, char* end)
 	{
-		buffer = Protocol::Write(buffer, end);
+		buffer = P2PProtocol::Write(buffer, end);
 		if(end - buffer >= strlen(ip)+6+strlen(name))
 		{
 			*(unsigned short*)buffer = strlen(ip);
@@ -422,7 +422,7 @@ public:
 	MakeHoleReject():SessionProtocol(TYPE){}
 	size_t Read(char* buffer, size_t size)
 	{
-		size_t used = Protocol::Read(buffer, size);
+		size_t used = SessionProtocol::Read(buffer, size);
 		buffer += used;
 		if(size - used > 2 && size - used > *(unsigned short*)buffer+6 && size - used >= *(unsigned short*)buffer+6+*(unsigned short*)(buffer+*(unsigned short*)(buffer)+4))
 		{
@@ -445,7 +445,7 @@ public:
 	}
 	char* Write(char* buffer, char* end)
 	{
-		buffer = Protocol::Write(buffer, end);
+		buffer = SessionProtocol::Write(buffer, end);
 		if(end - buffer >= strlen(ip)+6+strlen(name))
 		{
 			*(unsigned short*)buffer = strlen(ip);
@@ -473,7 +473,7 @@ public:
 	MakeHoleAgree():SessionProtocol(TYPE){}
 	size_t Read(char* buffer, size_t size)
 	{
-		size_t used = Protocol::Read(buffer, size);
+		size_t used = SessionProtocol::Read(buffer, size);
 		buffer += used;
 		if(size - used > 2 && size - used > *(unsigned short*)buffer+6 && size - used >= *(unsigned short*)buffer+6+*(unsigned short*)(buffer+*(unsigned short*)(buffer)+4))
 		{
@@ -496,7 +496,7 @@ public:
 	}
 	char* Write(char* buffer, char* end)
 	{
-		buffer = Protocol::Write(buffer, end);
+		buffer = SessionProtocol::Write(buffer, end);
 		if(end - buffer >= strlen(ip)+6+strlen(name))
 		{
 			*(unsigned short*)buffer = strlen(ip);

@@ -98,10 +98,10 @@ public:
 		sock = socket(AF_INET, SOCK_DGRAM, 0);
 		sockaddr_in addr;
 		addr.sin_port = htons(8887);
-		addr.sin_addr.s_addr = inet_addr("192.168.1.105");
+		addr.sin_addr.s_addr = inet_addr("10.211.55.2");
 		bind(sock, (sockaddr*)&addr, sizeof(sockaddr_in));
 	}
-	void Send(char* ip, unsigned short port, Protocol& p)
+	void Send(char* ip, unsigned short port, P2PProtocol& p)
 	{
 		sockaddr_in addr;
 		addr.sin_port = htons(port);
@@ -121,9 +121,9 @@ public:
 		cout<<"received data size:"<<bufferlen<<endl;
 		BufferDump(buffer, bufferlen);
 		if(bufferlen > 4)
-			cout<<"protocol type:"<<Protocol::PeekType(buffer, bufferlen)<<endl;
-		Protocol* p = NULL;
-		switch(Protocol::PeekType(buffer, bufferlen))
+			cout<<"protocol type:"<<P2PProtocol::PeekType(buffer, bufferlen)<<endl;
+		P2PProtocol* p = NULL;
+		switch(P2PProtocol::PeekType(buffer, bufferlen))
 		{
 		case AddPeerProtocol::TYPE:
 			p = new AddPeerProtocol();
@@ -143,7 +143,7 @@ public:
 			delete p;
 		}
 	}
-	void OnProtocol(Protocol& p, int socket, char* ip, unsigned short port)
+	void OnProtocol(P2PProtocol& p, int socket, char* ip, unsigned short port)
 	{
 		switch(p.type)
 		{

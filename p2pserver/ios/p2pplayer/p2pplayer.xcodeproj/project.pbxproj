@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D91D8A7719E8312B003B4EB1 /* P2PVideoNetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91D8A7619E8312B003B4EB1 /* P2PVideoNetManager.cpp */; };
 		D948282019E58B94007AA0B5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D948281F19E58B94007AA0B5 /* Foundation.framework */; };
 		D948282219E58B94007AA0B5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D948282119E58B94007AA0B5 /* CoreGraphics.framework */; };
 		D948282419E58B94007AA0B5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D948282319E58B94007AA0B5 /* UIKit.framework */; };
@@ -15,7 +16,7 @@
 		D948283019E58B94007AA0B5 /* ELAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D948282F19E58B94007AA0B5 /* ELAppDelegate.m */; };
 		D948283319E58B94007AA0B5 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D948283119E58B94007AA0B5 /* Main_iPhone.storyboard */; };
 		D948283619E58B94007AA0B5 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D948283419E58B94007AA0B5 /* Main_iPad.storyboard */; };
-		D948283919E58B94007AA0B5 /* ELViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D948283819E58B94007AA0B5 /* ELViewController.m */; };
+		D948283919E58B94007AA0B5 /* ELViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D948283819E58B94007AA0B5 /* ELViewController.mm */; };
 		D948283B19E58B94007AA0B5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D948283A19E58B94007AA0B5 /* Images.xcassets */; };
 		D948284219E58B94007AA0B5 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D948284119E58B94007AA0B5 /* XCTest.framework */; };
 		D948284319E58B94007AA0B5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D948281F19E58B94007AA0B5 /* Foundation.framework */; };
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D91D8A7519E82A7B003B4EB1 /* P2PVideoNetManager.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = P2PVideoNetManager.h; sourceTree = "<group>"; };
+		D91D8A7619E8312B003B4EB1 /* P2PVideoNetManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = P2PVideoNetManager.cpp; sourceTree = "<group>"; };
 		D948281C19E58B94007AA0B5 /* p2pplayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = p2pplayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D948281F19E58B94007AA0B5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D948282119E58B94007AA0B5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -48,13 +51,15 @@
 		D948283219E58B94007AA0B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		D948283519E58B94007AA0B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		D948283719E58B94007AA0B5 /* ELViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELViewController.h; sourceTree = "<group>"; };
-		D948283819E58B94007AA0B5 /* ELViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELViewController.m; sourceTree = "<group>"; };
+		D948283819E58B94007AA0B5 /* ELViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ELViewController.mm; sourceTree = "<group>"; };
 		D948283A19E58B94007AA0B5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D948284019E58B94007AA0B5 /* p2pplayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = p2pplayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D948284119E58B94007AA0B5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		D948284919E58B94007AA0B5 /* p2pplayerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "p2pplayerTests-Info.plist"; sourceTree = "<group>"; };
 		D948284B19E58B94007AA0B5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D948284D19E58B94007AA0B5 /* p2pplayerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = p2pplayerTests.m; sourceTree = "<group>"; };
+		D948285719E58BF9007AA0B5 /* P2PVideoProtocol.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; path = P2PVideoProtocol.h; sourceTree = "<group>"; };
+		D948285819E58CBA007AA0B5 /* udpclient.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = udpclient.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,14 +119,18 @@
 		D948282519E58B94007AA0B5 /* p2pplayer */ = {
 			isa = PBXGroup;
 			children = (
+				D948285819E58CBA007AA0B5 /* udpclient.h */,
 				D948282E19E58B94007AA0B5 /* ELAppDelegate.h */,
 				D948282F19E58B94007AA0B5 /* ELAppDelegate.m */,
 				D948283119E58B94007AA0B5 /* Main_iPhone.storyboard */,
 				D948283419E58B94007AA0B5 /* Main_iPad.storyboard */,
 				D948283719E58B94007AA0B5 /* ELViewController.h */,
-				D948283819E58B94007AA0B5 /* ELViewController.m */,
+				D948283819E58B94007AA0B5 /* ELViewController.mm */,
 				D948283A19E58B94007AA0B5 /* Images.xcassets */,
 				D948282619E58B94007AA0B5 /* Supporting Files */,
+				D948285719E58BF9007AA0B5 /* P2PVideoProtocol.h */,
+				D91D8A7519E82A7B003B4EB1 /* P2PVideoNetManager.h */,
+				D91D8A7619E8312B003B4EB1 /* P2PVideoNetManager.cpp */,
 			);
 			path = p2pplayer;
 			sourceTree = "<group>";
@@ -254,8 +263,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D948283919E58B94007AA0B5 /* ELViewController.m in Sources */,
+				D948283919E58B94007AA0B5 /* ELViewController.mm in Sources */,
 				D948282C19E58B94007AA0B5 /* main.m in Sources */,
+				D91D8A7719E8312B003B4EB1 /* P2PVideoNetManager.cpp in Sources */,
 				D948283019E58B94007AA0B5 /* ELAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -471,6 +481,7 @@
 				D948285319E58B94007AA0B5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D948285419E58B94007AA0B5 /* Build configuration list for PBXNativeTarget "p2pplayerTests" */ = {
 			isa = XCConfigurationList;
@@ -479,6 +490,7 @@
 				D948285619E58B94007AA0B5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -1,7 +1,13 @@
 #include "udpclient.h"
 int main()
 {
-	P2PClient client("192.168.1.105", 8887);
+	char server_ip[256];
+	int server_port;
+	cout<<"ip:";
+	cin>>server_ip;
+	cout<<"port;";
+	cin>>server_port;
+	P2PClient client(server_ip, server_port);
 	char text[102400];
 	cout<<">>";
 	cin.getline(text, 102400);
